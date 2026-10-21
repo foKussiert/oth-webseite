@@ -1,0 +1,29 @@
+doctype html
+html(lang="de")
+  head
+    meta(charset="UTF-8")
+    title Login
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css")
+    link(rel="icon", href="/img/logo.svg", type="image/svg+xml")
+    link(rel="stylesheet", href="/styles.css")
+  body
+    .container
+      .row
+        .col-3  
+          .logo-container
+            img.logo(src="/img/logo.svg", alt="OTHer Logo")
+          .fs-3
+            i.bi.bi-house-door-fill
+            span.align-middle.active-link Startseite
+          a(href="/login").button-full Login
+          a(href="/register").button-full Registrieren
+        .col-6
+          h2 Login
+          form(method="POST", action="/login", class="form-area")
+            label(for="name") Benutzername
+            input.form-control(type="text", id="name", name="name", placeholder="Nutzername eingeben", required)
+
+            label(for="password") Passwort
+            input.form-control(type="password", id="password", name="password", placeholder="Passwort eingeben", required)
+
+            button.btn(type="submit") Login

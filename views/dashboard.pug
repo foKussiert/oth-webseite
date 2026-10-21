@@ -1,0 +1,48 @@
+doctype html
+html(lang="de")
+  head
+    meta(charset="UTF-8")
+    title OTHer
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css")
+    link(rel="icon", href="/img/logo.svg", type="image/svg+xml")
+    link(rel="stylesheet", href="/styles.css")
+  body
+    .container
+      .row
+        .col-3
+          .logo-container
+            img.logo(src="/img/logo.svg", alt="OTHer Logo")
+          .fs-3
+            i.bi.bi-house-door-fill
+            a.align-middle.active-link(href="/dashboard") Startseite
+          .fs-3
+            i.bi.bi-person-fill
+            a.align-middle(href="/profile") Profil
+          .fs-3
+            i.bi.bi-people-fill
+            a.align-middle(href="/users") Nutzer
+          .fs-3
+            a.other-button(href="/other") Othern
+          .fs-3
+            a.logout-button(href="/logout") Logout
+        .col-6
+          h2 Startseite 
+          each o in others
+            .other-row
+              img.avatar(src=`/img/users/${o.profile_pic}.png`, alt="avatar")
+              .other-info
+                .other-header
+                  span.username= o.name
+                  span.handle @#{o.name}
+                  span.created= o.created
+                p.other-text= o.text
+        .col-3
+          form(method="get", action="/dashboard")
+            .input-group.mb-3
+              span.input-group-text
+                i.bi.bi-search
+              input.form-control(type="text", name="search", placeholder="Other durchsuchen...", value=search || "")
+          h4.mt-4 Trendende Hashtags
+          ul.list-unstyled
+            each tag in trending
+              li #{tag.tag} (#{tag.count})

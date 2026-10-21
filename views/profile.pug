@@ -1,0 +1,68 @@
+doctype html
+html(lang="de")
+  head
+    meta(charset="UTF-8")
+    title OTHer – Profil
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css")
+    link(rel="icon", href="/img/logo.svg", type="image/svg+xml")
+    link(rel="stylesheet", href="/styles.css")
+  body
+    .container
+      .row
+        .col-3
+          .logo-container
+            img.logo(src="/img/logo.svg", alt="OTHer Logo")
+          .fs-3
+            i.bi.bi-house-door-fill
+            a.align-middle(href="/dashboard") Startseite
+          .fs-3
+            i.bi.bi-person-fill
+            a.align-middle.active-link(href="/profile") Profil
+          .fs-3
+            i.bi.bi-people-fill
+            a.align-middle(href="/users") Nutzer
+          .fs-3
+            a.other-button(href="/other") Othern
+          .fs-3
+            a.logout-button(href="/logout") Logout
+
+        .col-6
+          h2 Profilseite
+          .profile-info
+            img.avatar(src=`/img/users/${user.profile_pic}.png`, alt="avatar")
+            form(method="POST", action="/profile/pic", enctype="multipart/form-data", class="mt-3")
+              .mb-3
+                label.form-label Profilbild ändern:
+                input.form-control(type="file", id="avatar", name="avatar", accept="image/*" required)
+              button.btn.btn-primary(type="submit")
+                i.bi.bi-upload.me-1
+                | Hochladen
+
+            p 
+              strong Name: 
+              | #{user.name}
+            p 
+              strong Geburtstag: 
+              | #{user.birthday}
+            p 
+              strong Bio: 
+              | #{user.bio_text}
+            p 
+              strong Mitglied seit: 
+              | #{user.created}
+            p 
+              strong Followers: 
+              | #{followerCount}
+            p 
+              strong Following: 
+              | #{followeeCount}
+
+          h3 Eigene Beiträge
+          p Du hast insgesamt #{otherCount} Others erstellt.
+          each post in posts
+            .other-row
+              .other-info
+                .other-header
+                  span.created= post.created
+                p.other-text= post.text
+
